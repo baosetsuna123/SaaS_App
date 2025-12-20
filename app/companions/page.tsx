@@ -17,17 +17,24 @@ const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
                 <h1>Companion Library</h1>
                 <div className="flex gap-4">
                     <SearchInput />
-                    <SubjectFilter />
+                    {/* <SubjectFilter /> */}
                 </div>
             </section>
             <section className="companions-grid">
-                {companions.map((companion) => (
-                    <CompanionCard
-                        key={companion.id}
-                        {...companion}
-                        color={getSubjectColor(companion.subject)}
-                    />
-                ))}
+                {companions.length > 0 ? (
+                    companions.map((companion) => (
+                        <CompanionCard
+                            key={companion.id}
+                            {...companion}
+                            color={getSubjectColor(companion.subject)}
+                        />
+                    ))
+                ) : (
+                    <div className="flex flex-row items-center justify-center gap-4 text-center">
+                        <img src="/icons/empty.png" alt="No companions found" className="w-24 h-24" />
+                        <p className="text-lg font-semibold">No companions found</p>
+                    </div>
+                )}
             </section>
         </main>
     )
